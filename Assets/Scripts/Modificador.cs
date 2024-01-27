@@ -34,7 +34,7 @@ public class Modificador : MonoBehaviour
 
             PointsScripts.ActualizarFrecuencia(ppsObject);
 
-            coste = Mathf.Round(coste * 1.2f);
+            coste = Mathf.Round(coste * 1.15f);
 
             cantidad++;
 
