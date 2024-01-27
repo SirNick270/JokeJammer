@@ -3,6 +3,9 @@ using TMPro;
 
 public class Click : MonoBehaviour
 {
+    public AudioClip[] sonidos; // Lista de sonidos disponibles
+    private AudioSource audioSource;
+
     public Points PointsScript;
     
     // Escala original del objeto
@@ -21,6 +24,7 @@ public class Click : MonoBehaviour
     {
         escalaOriginal = transform.localScale;
         escalaAgrandada = escalaOriginal / 1.1f; // Ajusta el factor según sea necesario
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Método que se ejecuta cuando se pulsa el objeto
@@ -30,6 +34,9 @@ public class Click : MonoBehaviour
 
         // Inicia la animación de escala y salto al hacer clic
         clicPresionado = true;
+
+        // Reproduce un sonido aleatorio
+        ReproducirSonidoAleatorio();
     }
 
     // Método que se ejecuta cuando se suelta el clic del objeto
@@ -65,5 +72,15 @@ public class Click : MonoBehaviour
     {
         // Interpola suavemente hacia la escala original
         transform.localScale = Vector3.Lerp(transform.localScale, escalaOriginal, Time.deltaTime / duracionAnimacion);
+    }
+
+    // Método para reproducir un sonido aleatorio
+    private void ReproducirSonidoAleatorio()
+    {
+        if (sonidos.Length > 0 && audioSource != null)
+        {
+            int indiceSonidoAleatorio = Random.Range(0, sonidos.Length);
+            audioSource.PlayOneShot(sonidos[indiceSonidoAleatorio]);
+        }
     }
 }
