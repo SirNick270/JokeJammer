@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Modificador : MonoBehaviour
 {
@@ -12,12 +13,47 @@ public class Modificador : MonoBehaviour
     public string nombre;
     public int cantidad = 0;
     public TMP_Text TextoCantidad;
+    private Button bt;
+    private bool firstTime = true;
+    private Image btImage;
+    private TextMeshProUGUI[] TextosHijos;
+
 
     private void Start()
     {
         coste = costeBase;
         nameText.text = nombre;
         ActualizarTextos();
+        bt = GetComponent<Button>();
+        bt.interactable = false;
+        btImage = GetComponent<Image>();
+        btImage.enabled = false;
+        TextosHijos = GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (TextMeshProUGUI textoHijo in TextosHijos)
+        {
+            textoHijo.enabled = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (firstTime && PointsScripts.points > coste * 0.5)
+        {
+            btImage.enabled = true;
+            foreach (TextMeshProUGUI textoHijo in TextosHijos)
+            {
+                textoHijo.enabled = true;
+            }
+        }
+
+        if (PointsScripts.points >= coste)
+        {
+            bt.interactable = true;
+        }
+        else
+        {
+            bt.interactable = false;
+        }
     }
 
     // Método para comprar la mejora
