@@ -18,7 +18,6 @@ public class Modificador : MonoBehaviour
     private Image btImage;
     private TextMeshProUGUI[] TextosHijos;
 
-
     private void Start()
     {
         if (coste == 0)
@@ -43,7 +42,6 @@ public class Modificador : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(firstTime);
 
         if (firstTime && PointsScripts.points > coste * 0.5)
         {
