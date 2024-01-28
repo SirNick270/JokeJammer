@@ -11,12 +11,23 @@ public class Points : MonoBehaviour
     public TMP_Text ppstx;
     public float points = 0;
     public float pps = 0f;
+    public float progress = 0;
+
+    public void Start()
+    {
+        ActualizarTextoTMPpps();
+        ActualizarTextoTMP();
+        ActualizarFrecuencia(0);
+    }
 
     public void ActualizarFrecuencia(float ppsp)
     {
-        pps +=  (float)Math.Round(ppsp, 1);
-        CancelInvoke("SumarPuntoPorFrecuencia");
-        InvokeRepeating("SumarPuntoPorFrecuencia", 0.0f, 1f / pps);
+        if(points != 0)
+        {
+            pps += (float)Math.Round(ppsp, 1);
+            CancelInvoke("SumarPuntoPorFrecuencia");
+            InvokeRepeating("SumarPuntoPorFrecuencia", 0.0f, 1f / pps);
+        }
     } 
 
     public void ActualizarTextoTMP()
@@ -46,5 +57,6 @@ public class Points : MonoBehaviour
     {
         points++;
         ActualizarTextoTMP();
+        progress++;
     } 
 }

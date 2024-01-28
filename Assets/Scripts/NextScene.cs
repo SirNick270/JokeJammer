@@ -18,7 +18,7 @@ public class CambiarEscena : MonoBehaviour
 
     private void Update()
     {
-        if (points.pps >= progressBar.ppsMax)
+        if (points.progress >= progressBar.progressMax)
         {
             bt.interactable = true;
         }
