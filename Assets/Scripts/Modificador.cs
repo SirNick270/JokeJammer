@@ -8,35 +8,43 @@ public class Modificador : MonoBehaviour
     public int costeBase = 100;
     public float ppsObject = 1f;
     public TMP_Text TextoCoste;
-    private float coste;
+    public float coste;
     public TMP_Text nameText;
     public string nombre;
     public int cantidad = 0;
     public TMP_Text TextoCantidad;
     private Button bt;
-    private bool firstTime = true;
+    public bool firstTime = true;
     private Image btImage;
     private TextMeshProUGUI[] TextosHijos;
 
 
     private void Start()
     {
-        coste = costeBase;
+        if (coste == 0)
+        {
+            coste = costeBase;
+        }
         nameText.text = nombre;
         ActualizarTextos();
         bt = GetComponent<Button>();
         bt.interactable = false;
         btImage = GetComponent<Image>();
-        btImage.enabled = false;
         TextosHijos = GetComponentsInChildren<TextMeshProUGUI>();
-        foreach (TextMeshProUGUI textoHijo in TextosHijos)
+        if (cantidad == 0)
         {
-            textoHijo.enabled = false;
+            foreach (TextMeshProUGUI textoHijo in TextosHijos)
+            {
+                textoHijo.enabled = false;
+            }
+            btImage.enabled = false;
         }
     }
 
     private void Update()
     {
+        Debug.Log(firstTime);
+
         if (firstTime && PointsScripts.points > coste * 0.5)
         {
             btImage.enabled = true;
@@ -69,6 +77,8 @@ public class Modificador : MonoBehaviour
             PointsScripts.ActualizarTextoTMP();
 
             PointsScripts.ActualizarFrecuencia(ppsObject);
+
+            PointsScripts.progress++;
 
             coste = Mathf.Round(coste * 1.15f);
 

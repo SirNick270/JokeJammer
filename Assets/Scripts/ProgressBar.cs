@@ -8,11 +8,11 @@ public class ProgressBar : MonoBehaviour
 {
     public Image bar;
     public Points pointsScript;
-    public float ppsMax;
+    public float progressMax;
 
     // Update is called once per frame
     void Update()
     {
-        bar.fillAmount = pointsScript.pps / ppsMax;
+        bar.fillAmount = pointsScript.progress / progressMax;
     }
 }
